@@ -4,6 +4,7 @@ import "./BookList.css";
 
 export default function BookList(props) {
   const [filterGenre, setFilterGenre] = useState("All");
+  const [query, setQuery] = useState("");
 
   // Uses Set class to generate list of genres without repeating items
   let genres = [...new Set(props.books.map(book => book.genre))].filter(genre => genre != 'Genre not specified');
@@ -13,10 +14,18 @@ export default function BookList(props) {
     setFilterGenre(e.target.value)
   }
 
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  }
+
   return (
   <div className="container" id="book-list">
 
       <div className="d-flex justify-content-end">
+        
+        <label htmlFor="query" className="me-2">Search by title or author:</label>
+        <input name="query" value={query} onChange={e => handleChange(e)}/>
+      
         <div id="filter" className="px-2">
           <label id="list-filter" className="me-2" htmlFor="genre-filter">
             Show genre:
@@ -35,13 +44,26 @@ export default function BookList(props) {
             ))}
           </select>
         </div>
+
+       
+
       </div>
 
 
 
         <hr className="mx-auto"/>
         <div className="row justify-content-between">
-            {props.books.map(book => (
+            {props.books
+              .filter(book => {
+                if (query === "") {
+                  return book
+                } else if (book.title.toLowerCase().includes(query.toLowerCase())) {
+                  return book
+                } else if (book.authors.toLowerCase().includes(query.toLowerCase())) {
+                  return book
+                }
+              })            
+              .map(book => (
               <div 
               className={`${book.genre === filterGenre || filterGenre === "All" ? "col-lg-3 col-md-5 m-3" : "invisible"}`}
               key={book.bookid}>
