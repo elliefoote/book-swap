@@ -36,11 +36,6 @@ INSERT INTO Users (username, wishlist) VALUES
 ("User1", "I want 50 books"),
 ("User2", "Looking for non-fiction books.");
 
--- ALTER TABLE `Books` ADD CONSTRAINT `Books_fk0` FOREIGN KEY (`addedby`) REFERENCES `Users`(`userid`);
-
-ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`sender`) REFERENCES `Users`(`userid`);
-
-ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk1` FOREIGN KEY (`recipient`) REFERENCES `Users`(`userid`);
 
 INSERT INTO Books (addedby, title, authors, imgurl, isbn, genre, summary, bookcondition) VALUES 
 (1, "Red-Handed", "Peter Schweizer", "https://storage.googleapis.com/du-prd/books/images/9780063061149.jpg", "1234", "Politics", "The author of “Profiles in Corruption” portrays a conspiracy of how the Chinese government might infiltrate American institutions.", "Excellent used condition"),
@@ -60,3 +55,8 @@ INSERT INTO Messages (messagesubject, body, sender, recipient) VALUES
 ("Subject 3", "This is email body 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", 2, 1),
 ("Subject 4", "This is email body 4. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", 2, 1);
 
+ALTER TABLE `Books` ADD CONSTRAINT `Books_fk0` FOREIGN KEY (`addedby`) REFERENCES `Users`(`userid`);
+
+ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`sender`) REFERENCES `Users`(`userid`);
+
+ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk1` FOREIGN KEY (`recipient`) REFERENCES `Users`(`userid`);
