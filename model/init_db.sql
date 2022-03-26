@@ -36,7 +36,7 @@ INSERT INTO Users (username, wishlist) VALUES
 ("User1", "I want 50 books"),
 ("User2", "Looking for non-fiction books.");
 
-ALTER TABLE `Books` ADD CONSTRAINT `Books_fk0` FOREIGN KEY (`addedby`) REFERENCES `Users`(`userid`);
+-- ALTER TABLE `Books` ADD CONSTRAINT `Books_fk0` FOREIGN KEY (`addedby`) REFERENCES `Users`(`userid`);
 
 ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`sender`) REFERENCES `Users`(`userid`);
 
