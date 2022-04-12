@@ -3,11 +3,17 @@ DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE `Users` (
-	`userid` int NOT NULL AUTO_INCREMENT,
-	`username` varchar(10) UNIQUE,
-	`wishlist` varchar(255) NOT NULL,
-	PRIMARY KEY (`userid`)
+	`userid` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`username` varchar(10) NOT NULL UNIQUE,
+	`password` VARCHAR(200) NOT NULL,
+    `email` VARCHAR(50) NOT NULL UNIQUE,
+	`wishlist` varchar(255) NOT NULL
 );
+
+INSERT INTO `Users` VALUES 
+    (1, 'user1','$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W','user1@example.com', 'Looking for books about Barcelona.'),
+    (11, 'user2','$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6','user2@example.com', 'Looking for non-fiction books.'),
+    (21, 'user3','$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy','user3@example.com', 'Looking for romance novels.');
 
 CREATE TABLE `Books` (
 	`bookid` int NOT NULL AUTO_INCREMENT,
@@ -31,11 +37,6 @@ CREATE TABLE `Messages` (
 	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`messageid`)
 );
-
-INSERT INTO Users (username, wishlist) VALUES
-("User1", "I want 50 books"),
-("User2", "Looking for non-fiction books.");
-
 
 INSERT INTO Books (addedby, title, authors, imgurl, isbn, genre, summary, bookcondition) VALUES 
 (1, "Red-Handed", "Peter Schweizer", "https://storage.googleapis.com/du-prd/books/images/9780063061149.jpg", "1234", "Politics", "The author of “Profiles in Corruption” portrays a conspiracy of how the Chinese government might infiltrate American institutions.", "Excellent used condition"),

@@ -202,12 +202,8 @@ const deleteMessage = async id => {
 
 
   return (
-    <div className="App">
-        <Navbar />
-        <div className="d-flex justify-content-end align-items-center pe-3">
-            <div className="mt-3"><p>Welcome, <b>User {currentUser}</b>!</p></div>
-            <button className="btn btn-primary btn-sm ms-3">Log out</button>
-        </div>
+    <div className="App bg-light">
+        <Navbar currentUser={currentUser}/>
         <Routes>
                 <Route path="/" element={<HomeView />} />
                 <Route path="books" element={<BookList books={books} />} />

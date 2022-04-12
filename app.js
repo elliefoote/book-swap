@@ -6,6 +6,7 @@ const cors = require('cors');  // add at the top
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth.js');
 
 var app = express();
 app.use(cors());  // add after 'app' is created 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/client/build')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });

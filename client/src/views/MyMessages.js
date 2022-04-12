@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import './MyMessages.css';
 import MailList from '../components/MailList.js';
 import NewMessage from '../components/NewMessage.js';
+import {RiMailAddLine} from 'react-icons/ri'
 
 export default function MyMessages(props) {
     const [openMessage, setOpenMessage] = useState(null);
@@ -41,17 +42,14 @@ export default function MyMessages(props) {
       }
 
   return (
-    <div id="my-messages">
-        <h1>SwapMail</h1>
-        <div className="d-flex justify-content-start"><button className="btn btn-primary" onClick={e => handleOpen(e)}>Compose new message</button></div>
-        
-        {props.submitSuccess && (<div className="border bg-light d-flex justify-content-center align-items-center p-2 mb-4 my-3"><p id="submit-text"className="text-success">Message sent!</p></div>)}
+    <div id="my-messages" className="border bg-white rounded mt-4">
+        <div className="d-flex justify-content-start"><button className="btn btn-primary" onClick={e => handleOpen(e)}><RiMailAddLine /></button></div>
         
         <div id="mail-container" className="mt-5">
         
-        <div className="me-5">
+        
         <MailList messages={props.messages} currentUser={props.currentUser} openMessage={(id) => openNewMessage(id)} deleteMessageCB={(id) => deleteThisMessage(id)}/>
-        </div>
+        
 
         <div id="message-pane" className="px-5 py-5 rounded-3">
         
