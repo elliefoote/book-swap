@@ -62,6 +62,4 @@ Features that I'd like to add to the app in the future include:
 * Home page graphic created by upklyak and sourced from [Freepik.com](https://www.freepik.com/vectors/people-book)
 * 404 page graphic from [Craftwork](http://www.craftwork.design)
 
-_This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
-
 [Back to Top](#book-swapper)
