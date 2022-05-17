@@ -2,7 +2,9 @@ import React, {useState, useEffect} from "react";
 import './MyMessages.css';
 import MailList from '../components/MailList.js';
 import NewMessage from '../components/NewMessage.js';
-import {RiMailAddLine} from 'react-icons/ri'
+import {RiMailAddLine} from 'react-icons/ri';
+import User1Pic from '../assets/User1Pic.png';
+import {Avatar} from "@mui/material";
 
 export default function MyMessages(props) {
     const [openMessage, setOpenMessage] = useState(null);
@@ -47,7 +49,7 @@ export default function MyMessages(props) {
         
         <div id="mail-container" className="mt-5">
         
-        
+        <Avatar src={User1Pic} alt="User 1" />
         <MailList messages={props.messages} currentUser={props.currentUser} openMessage={(id) => openNewMessage(id)} deleteMessageCB={(id) => deleteThisMessage(id)}/>
         
 
