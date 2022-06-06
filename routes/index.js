@@ -1,20 +1,20 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
-var fetch = require('node-fetch');
+var fetch = require("node-fetch");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send({ title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.send({ title: "Express" });
 });
 
 // ROUTES FOR USERS TABLE
 router.get("/users", (req, res) => {
   db("SELECT * FROM users;")
-    .then(results => {
+    .then((results) => {
       res.send(results.data);
     })
-    .catch(err => res.status(500).send(err));
+    .catch((err) => res.status(500).send(err));
 });
 
 // ROUTES FOR BOOKS TABLE
@@ -22,10 +22,10 @@ router.get("/users", (req, res) => {
 // Get all books
 router.get("/books", (req, res) => {
   db("SELECT * FROM books;")
-    .then(results => {
+    .then((results) => {
       res.send(results.data);
     })
-    .catch(err => res.status(500).send(err));
+    .catch((err) => res.status(500).send({ error: err.message }));
 });
 
 // Get book by ID
@@ -49,10 +49,11 @@ router.get("/books/:book_id", async (req, res) => {
 
 // Add new book
 router.post("/books", async (req, res) => {
-  let { addedby, title, authors, imgurl, isbn, genre, summary, bookcondition } = req.body;
+  let { addedby, title, authors, imgurl, isbn, genre, summary, bookcondition } =
+    req.body;
   let sql = `insert into books (addedby, title, authors, imgurl, isbn, genre, summary, bookcondition) 
             values (${addedby}, '${title}', '${authors}', '${imgurl}', '${isbn}', '${genre}', '${summary}', '${bookcondition}')`;
-    try {
+  try {
     await db(sql);
     let result = await db("select * from books");
     let books = result.data;
@@ -65,7 +66,8 @@ router.post("/books", async (req, res) => {
 // Edit book
 router.put("/books/:book_id", async (req, res) => {
   let id = req.params.book_id;
-  let { addedby, title, authors, imgurl, isbn, genre, summary, bookcondition } = req.body;
+  let { addedby, title, authors, imgurl, isbn, genre, summary, bookcondition } =
+    req.body;
   let sqlCheckID = `SELECT * FROM books WHERE bookid = ${id}`;
   let sqlUpdate = `
     UPDATE books SET 
@@ -122,12 +124,12 @@ router.get("/messages", (req, res) => {
                         FROM Messages 
                         JOIN (users AS fromUsers) ON (Messages.Sender = fromUsers.userid) 
                         JOIN (users AS toUsers) ON (Messages.Recipient = toUsers.userid)
-                        ORDER BY timestamp DESC`
+                        ORDER BY timestamp DESC`;
   db(sqlGetMessages)
-    .then(results => {
+    .then((results) => {
       res.send(results.data);
     })
-    .catch(err => res.status(500).send(err));
+    .catch((err) => res.status(500).send(err));
 });
 
 // Add new message
@@ -139,7 +141,7 @@ router.post("/messages", async (req, res) => {
             FROM Messages 
             JOIN (users AS fromUsers) ON (Messages.Sender = fromUsers.userid) 
             JOIN (users AS toUsers) ON (Messages.Recipient = toUsers.userid)
-            ORDER BY timestamp DESC`
+            ORDER BY timestamp DESC`;
   try {
     await db(sqlPost);
     let result = await db(sqlGetMessages);
@@ -159,7 +161,7 @@ router.delete("/messages/:message_id", async (req, res) => {
             FROM Messages 
             JOIN (users AS fromUsers) ON (Messages.Sender = fromUsers.userid) 
             JOIN (users AS toUsers) ON (Messages.Recipient = toUsers.userid)
-            ORDER BY timestamp DESC`
+            ORDER BY timestamp DESC`;
   try {
     let result = await db(sqlCheckID);
     if (result.data.length === 0) {
